@@ -1,0 +1,116 @@
+<% include ../_partials/header %>
+<div class="container">
+
+    <div class="mucsali-btns">
+        <button onclick="show('wobblerek')">Wobblerek</button>
+        <button onclick="show('korforgok')">Körforgók</button>
+        <button onclick="show('tamolygok')">Támolygók</button>
+        <button onclick="show('wobblerek')">Gumik</button>
+    </div>
+
+    <!--KÖRFORGÓK-->
+    <div class="korforgok mucsali-block">
+        <div class="row">
+        <%
+        let kcounter = 0;
+        kfk.forEach(function(kf){
+            let halak = kf.halak;
+            let str = '';
+            Object.keys(halak).forEach(function(hal) {
+                if(typeof halak[hal] == 'number' || typeof halak[hal] == 'string' && halak[hal] != 0){
+                    str += hal+': '+halak[hal]+', ';
+                }
+            });
+            if(kcounter % 3 === 0){ %>
+                </div><div class="row">
+            <% } %>
+            <div class="mucsali-item col-12 col-md-4">
+                <div class="title"><a href="mucsali/edit/<%= kf._id %>"><%= kf.marka+" "+kf.tipus %></a></div>
+                <div><img src="uploads/mucsalik/<%= kf.kepUrl %>" /></div>
+                <div class="halak"><%= str.length > 0 ? str.substring(0, str.length - 2) : '' %></div>
+            </div>
+            <% kcounter++;
+        }); %>
+        </div>
+    </div>
+
+    <!--GUMIK-->
+    <div class="gumik mucsali-block">
+        <div class="row">
+            <%
+            let gcounter = 0;
+            gumik.forEach(function(gumi){
+                let halak = gumi.halak;
+                let str = '';
+                Object.keys(halak).forEach(function(hal) {
+                    if(typeof halak[hal] == 'number' || typeof halak[hal] == 'string' && halak[hal] != 0){
+                        str += hal+': '+halak[hal]+', ';
+                    }
+                });
+            if(gcounter % 3 === 0){ %>
+        </div><div class="row">
+            <% } %>
+            <div class="mucsali-item col-12 col-md-4">
+                <div class="title"><a href="mucsali/edit/<%= gumi._id %>"><%= gumi.marka+" "+gumi.tipus %></a></div>
+                <div><img src="uploads/mucsalik/<%= gumi.kepUrl %>" /></div>
+                <div class="halak"><%= str.length > 0 ? str.substring(0, str.length - 2) : '' %></div>
+            </div>
+            <% gcounter++;
+            }); %>
+        </div>
+    </div>
+
+    <!--TÁMOLYGÓK-->
+    <div class="tamolygok mucsali-block">
+        <div class="row">
+            <%
+            let tcounter = 0;
+            tmk.forEach(function(tm){
+                let halak = tm.halak;
+                let str = '';
+                Object.keys(halak).forEach(function(hal) {
+                    if(typeof halak[hal] == 'number' || typeof halak[hal] == 'string' && halak[hal] != 0){
+                        str += hal+': '+halak[hal]+', ';
+                    }
+                });
+            if(tcounter % 3 === 0){ %>
+        </div><div class="row">
+            <% } %>
+            <div class="mucsali-item col-12 col-md-4">
+                <div class="title"><a href="mucsali/edit/<%= tm._id %>"><%= tm.marka+" "+tm.tipus %></a></div>
+                <div><img src="uploads/mucsalik/<%= tm.kepUrl %>" /></div>
+                <div class="halak"><%= str.length > 0 ? str.substring(0, str.length - 2) : '' %></div>
+            </div>
+            <% tcounter++;
+            }); %>
+        </div>
+    </div>
+
+    <!--WOBBLEREK-->
+    <div class="wobblerek mucsali-block">
+        <div class="row">
+            <%
+            let wcounter = 0;
+            wbk.forEach(function(wb){
+                let halak = wb.halak;
+                let str = '';
+                Object.keys(halak).forEach(function(hal) {
+                    if(typeof halak[hal] == 'number' || typeof halak[hal] == 'string' && halak[hal] != 0){
+                        str += hal+': '+halak[hal]+', ';
+                    }
+                });
+            if(wcounter % 3 === 0){ %>
+        </div><div class="row">
+            <% } %>
+            <div class="mucsali-item col-12 col-md-4">
+                <div class="title"><a href="mucsali/edit/<%= wb._id %>"><%= wb.marka+" "+wb.tipus %></a></div>
+                <div><img src="uploads/mucsalik/<%= wb.kepUrl %>" /></div>
+                <div class="halak"><%= str.length > 0 ? str.substring(0, str.length - 2) : '' %></div>
+            </div>
+            <% wcounter++;
+            }); %>
+        </div>
+    </div>
+
+</div>
+<% include ../_partials/footer %>

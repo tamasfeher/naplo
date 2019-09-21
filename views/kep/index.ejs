@@ -1,0 +1,27 @@
+<% include ../_partials/header %>
+<% include ../functions %>
+<div class="container">
+    <div class="flex">
+        <div class="page-title">Galéria</div>
+        <div class="buttons">
+            <a class="btn btn-yellow" href="/kep/uj">Feltöltés</a>
+        </div>
+    </div>
+
+
+  <div class="kepek-slider">
+    <% kepek.forEach(function(kep){ %>
+        <div class="slide-item">
+          <div class="img-container"><img src="uploads/kepek/<%=kep.kepUrl %>" class="d-block w-100" alt=""></div>
+          <div class="img-data">
+            <div>Hely: <%=kep.hely %></div>
+            <div>Méret: <%=kep.suly %></div>
+            <div>Csali: <%=kep.mucsali %></div>
+            <div>Feltöltő: <%=kep.felh.username %></div>
+            <div>Dátum: <%=getDateFormat(kep.feltoltes) %></div>
+          </div>
+        </div>
+    <% }) %>
+  </div>
+</div>
+<% include ../_partials/footer %>

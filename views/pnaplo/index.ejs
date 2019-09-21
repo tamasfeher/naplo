@@ -1,0 +1,76 @@
+<%- include("../_partials/header", {hatter: "hatter"})  %>
+<% include ../functions %>
+<div class="container">
+    <div class="flex">
+        <div class="page-title">Pergető horgásznapló</div>
+        <div class="buttons">
+            <a class="btn btn-yellow" href="/pergetonaplo/beiras">Beírás</a>
+            <a class="btn btn-yellow" href="/pergetonaplo/osszesito">Összesítés</a>
+        </div>
+    </div>
+    <div class="table-container">
+        <table class="pnaplo-table">
+            <thead class="thead-dark">
+                <tr>
+                    <th id="idopont">Időpont</th>
+                    <th>Hely</th>
+                    <th>Időjárás</th>
+                    <th>Óra</th>
+                    <th>Ba</th>
+                    <th>Bo</th>
+                    <th>Cs</th>
+                    <th>D</th>
+                    <th>H</th>
+                    <th>Sg</th>
+                    <th>Sl</th>
+                    <th>Th</th>
+                    <th>Vk</th>
+                    <th class="egyeb">Egyéb</th>
+                </tr>
+            </thead>
+            <tbody>
+            <% bejegys.forEach(function(bejegy){ %>
+                <tr>
+                    <td><%=getDateFormat(bejegy.idopont) %></td>
+                    <td><%=bejegy.hely %></td>
+                    <td><%=bejegy.atlCels %> °C, <%=bejegy.felhoKep %></td>
+                    <td><%=bejegy.start %>-<%=bejegy.vege %></td>
+                    <td class="hal"><%=bejegy.balin %></td>
+                    <td class="hal"><%=bejegy.bodorka %></td>
+                    <td class="hal"><%=bejegy.csuka %></td>
+                    <td class="hal"><%=bejegy.domolyko %></td>
+                    <td class="hal"><%=bejegy.harcsa %></td>
+                    <td class="hal"><%=bejegy.suger %></td>
+                    <td class="hal"><%=bejegy.sullo %></td>
+                    <td class="hal"><%=bejegy.torpeharcsa %></td>
+                    <td class="hal"><%=bejegy.vorosszarnyu %></td>
+                    <td><%=bejegy.egyeb %></td>
+                </tr>
+            <% }); %>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="modal">
+    <div class="modal-filter"></div>
+    <div id="dateModal">
+        <div class="modal-head">
+            <div class="title">Szűrő</div>
+            <div class="close-btn">
+                <div class="stick stick-left"></div>
+                <div class="stick stick-right"></div>
+            </div>
+        </div>
+        <div>
+            <label for="dateFilterFrom">Kezdő nap:</label>
+            <input type="text" class="datepicker" id="dateFilterFrom">
+        </div>
+        <div>
+            <label for="dateFilterTo">Záró nap:</label>
+            <input type="text" class="datepicker" id="dateFilterTo">
+        </div>
+        <div class="btn-modal">Szűrés</div>
+    </div>
+</div>
+<% include ../_partials/footer %>

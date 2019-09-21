@@ -1,0 +1,81 @@
+<%- include("../_partials/header", {hatter: "hatter"})  %>
+<div class="form-container">
+    <div class="title">Módosítás</div>
+    <form action="/mucsali/edit" method="POST">
+        <input type="hidden" name="id" value="<%= mucsali._id %>" />
+        <div class="name"><%= mucsali.marka+" "+mucsali.tipus %></div>
+        <div class="edit-image">
+            <img src="/uploads/mucsalik/<%= mucsali.kepUrl %>" />
+        </div>
+
+        <div class="form-group">
+            <label for="mucsali[marka]">Márka:</label>
+            <input class="form-control" type="text" name="mucsali[marka]" value="<%= mucsali.marka %>">
+        </div>
+
+        <div class="form-group">
+            <label for="mucsali[tipus]">Típus:</label>
+            <input class="form-control" type="text" name="mucsali[tipus]" value="<%= mucsali.tipus %>">
+        </div>
+
+        <div class="halak-row">
+            <div class="form-group">
+                <label for="halak[bal]">Balin:</label>
+                <input class="form-control sm" type="text" name="halak[bal]" value="<%= mucsali.halak.bal %>">
+            </div>
+
+            <div class="form-group">
+                <label for="halak[bod]">Bodorka:</label>
+                <input class="form-control sm" type="text" name="halak[bod]" value="<%= mucsali.halak.bod %>">
+            </div>
+        </div>
+
+        <div class="halak-row">
+            <div class="form-group">
+                <label for="halak[cs]">Csuka:</label>
+                <input class="form-control sm" type="text" name="halak[cs]" value="<%= mucsali.halak.cs %>">
+            </div>
+
+            <div class="form-group">
+                <label for="halak[dom]">Domolykó:</label>
+                <input class="form-control sm" type="text" name="halak[dom]" value="<%= mucsali.halak.dom %>">
+            </div>
+        </div>
+        <div class="halak-row">
+            <div class="form-group">
+                <label for="halak[har]">Harcsa:</label>
+                <input class="form-control sm" type="text" name="halak[har]" value="<%= mucsali.halak.har %>">
+            </div>
+
+            <div class="form-group">
+                <label for="halak[sug]">Sügér:</label>
+                <input class="form-control sm" type="text" name="halak[sug]" value="<%= mucsali.halak.sug %>">
+            </div>
+        </div>
+
+        <div class="halak-row">
+            <div class="form-group">
+                <label for="halak[sul]">Süllő:</label>
+                <input class="form-control sm" type="text" name="halak[sul]" value="<%= mucsali.halak.sul %>">
+            </div>
+
+            <div class="form-group">
+                <label for="halak[th]">Törpeharcsa:</label>
+                <input class="form-control sm" type="text" name="halak[th]" value="<%= mucsali.halak.th %>">
+            </div>
+        </div>
+        <div class="halak-row">
+            <div class="form-group">
+                <label for="halak[vor]">Vörösszarnyú:</label>
+                <input class="form-control sm" type="text" name="halak[vor]" value="<%= mucsali.halak.vor %>">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="halak[egyeb]">Egyéb:</label>
+            <input class="form-control" type="text" name="halak[egyeb]" value="<%= mucsali.halak.egyeb %>">
+        </div>
+
+        <input type="submit" value="Módosítás">
+    </form>
+</div>
+<% include ../_partials/footer %>

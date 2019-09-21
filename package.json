@@ -1,0 +1,30 @@
+{
+  "name": "naplo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.4",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "express-session": "^1.15.6",
+    "fs": "^0.0.1-security",
+    "js-datepicker": "^4.0.10",
+    "method-override": "^3.0.0",
+    "mongoose": "^5.4.19",
+    "multer": "^1.4.1",
+    "node-sass": "^4.11.0",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "passport-local-mongoose": "^5.0.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "scss": "sass --watch assets/css/scss/main.scss:assets/css/main.css --style compressed",
+    "mongo": "cd C:/Program Files/MongoDB/Server/3.4/bin && mongod"
+  },
+  "author": "",
+  "license": "ISC"
+}

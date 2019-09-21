@@ -1,0 +1,275 @@
+body{
+  padding-top: 62px;
+  padding-bottom: 76px;
+  margin: 0;
+  font-family: sans-serif;
+  font-size: 14px;
+  color: $yellow;
+  background: url(/public/green.jpg);
+  min-height: calc(100vh - 138px);
+  position: relative;
+
+  &.hatter{
+      background: url(/public/hatter.jpg);
+    }
+}
+
+footer{
+  background-color: #000;
+  margin-top: 20px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+
+  .container{
+    padding: 20px 0;
+  }
+}
+
+a{
+  text-decoration: none;
+  color: unset;
+  &:hover{
+    color: #fff;
+    text-decoration: underline;
+  }
+}
+
+.container{
+  max-width: 1280px;
+  margin: auto;
+}
+.table-container{
+  max-width: 100%;
+  overflow: auto;
+}
+
+.page-title{
+  font-size: 34px;
+  margin-right: 20px;
+}
+.flex{
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+}
+.width50{
+  width: 50px;
+}
+
+.form-container{
+  padding: 0 40px;
+
+  .title{
+    font-size: 34px;
+    margin: 30px 0 10px 70px;
+  }
+
+  form {
+    margin-left: 70px;
+    border-radius: 5px;
+    background-color: rgba(76, 175, 80, 0.8);
+    padding: 20px;
+    width: 380px;
+    margin-bottom: 10px;
+
+    .name {
+      padding-bottom: 5px;
+      border-bottom: 1px solid;
+      font-size: 22px;
+      font-style: italic;
+    }
+
+    .halak-row{
+      display: flex;
+      justify-content: space-between;
+      padding: 0 20px;
+
+      &.ido{
+        .form-group{
+          label{
+            width: 50px;
+          }
+          &.md{
+            .form-control{
+              width: 130px;
+              text-align: left;
+              padding: 6px 12px;
+            }
+          }
+        }
+      }
+
+      .form-group {
+        width: unset;
+
+        &.md{
+          label{
+            width: 85px;
+          }
+          .form-control{
+            width: 60px;
+            padding: 4px;
+            text-align: center;
+            display: inline-block;
+          }
+        }
+      }
+
+
+    }
+
+    .form-group{
+      display: inline-block;
+      width: 100%;
+
+      label {
+        font-weight: 600;
+        width: 110px;
+        display: inline-block;
+
+        &.log{
+          margin: 6px 0;
+        }
+      }
+
+      .form-control {
+        display: block;
+        width: 90%;
+        height: 34px;
+        padding: 6px 12px;
+        font-size: 14px;
+        color: #555;
+        vertical-align: middle;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        margin: 6px auto;
+
+        &.file{
+          color: unset;
+          background-color: unset;
+          border: 0;
+          padding: 0;
+          width: unset;
+          height: unset;
+          margin-bottom: 12px;
+        }
+
+        &.sm {
+          max-width: 34px;
+          padding: 4px;
+          text-align: center;
+          display: inline-block;
+        }
+
+      }
+    }
+
+    input[type=submit] {
+      width: 90%;
+      background-color: $yellow;
+      color: $darkgreen;
+      padding: 14px 20px;
+      margin: 20px 19px 10px;
+      border: none;
+      border-radius: 4px;
+      font-size: 20px;
+    }
+
+    input[type=time]::-webkit-inner-spin-button,
+    input[type=time]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      margin-right: -14px;
+    }
+  }
+}
+
+//DATEPICKER
+
+.qs-datepicker{
+  width: calc(90% - 2px);
+  background-color: $darkgreen;
+  border: 1px solid $yellow;
+
+  .qs-controls{
+    background-color: $yellow;
+    color: $green;
+
+    .qs-arrow.qs-right::after{
+      border-left-color: $green;
+      left: calc(50% + 2px);
+    }
+    .qs-arrow.qs-left::after{
+      border-right-color: $green;
+      right: calc(50% + 2px);
+    }
+  }
+
+  .qs-squares{
+    width: 250px;
+    margin: auto;
+
+    .qs-square{
+      background-color: yellow;
+      margin: 2px;
+      border-radius: 0;
+      color: $darkgreen;
+      width: 12.6236%;
+
+      &.qs-day, &.qs-empty{
+        color: $yellow;
+        background-color: unset;
+      }
+
+      &.qs-current{
+        color: #FF6000;
+      }
+
+      &.qs-active{
+        color: $yellow;
+        background-color: $darkgreen;
+        border: 1px solid $yellow;
+      }
+
+      &:not(.qs-empty):not(.qs-disabled):not(.qs-day):not(.qs-active):hover{
+        color: $yellow;
+        background-color: $lightgreen
+      }
+    }
+  }
+  .qs-overlay{
+
+    .qs-close:hover {
+      color: $yellow;
+    }
+
+    .qs-overlay-year{
+      outline: 0;
+      width: 90%;
+    }
+
+    .qs-submit{
+      background: $yellow;
+      color: $darkgreen;
+      border-color: $yellow !important;
+      font-weight: 600;
+      padding: 6px 16px;
+
+      &:not(.qs-disabled):hover{
+        background: $darkgreen;
+        color: $yellow;
+        border: 1px solid $yellow;
+      }
+    }
+  }
+}
+
+@include width1180{
+  .container{
+    margin: 0 20px;
+  }
+}

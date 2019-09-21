@@ -1,0 +1,12 @@
+<%
+getDateFormat = function (date) {
+    let monthNames = ['Január', 'Február', 'Március', 'Április', 'Május', 'Június',
+        'Július', 'Augusztus', 'Szeptember', 'Október', 'November', 'December'];
+    let d = date.getDate();
+    let m = monthNames[date.getMonth()];
+    let y = date.getFullYear();
+
+    return y + '. ' + m + ' ' + d + '.';
+}
+
+%>

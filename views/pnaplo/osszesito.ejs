@@ -1,0 +1,46 @@
+<%- include("../_partials/header", {hatter: "hatter"})  %>
+<% include ../functions %>
+<div class="container">
+    <div class="flex">
+        <div class="page-title">Összesített pergetőnapló</div>
+        <div class="buttons">
+            <a class="btn btn-yellow" href="/pergetonaplo">Pergetőnapló</a>
+        </div>
+    </div>
+    <table class="pnaplo-table osszesito">
+        <thead class="thead-dark">
+        <tr>
+            <th>Év</th>
+            <th>Napok</th>
+            <th>Ba</th>
+            <th>Bo</th>
+            <th>Cs</th>
+            <th>D</th>
+            <th>H</th>
+            <th>Sg</th>
+            <th>Sl</th>
+            <th>Th</th>
+            <th>Vk</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% osszesitett.forEach(function(bejegy){ %>
+        <tr>
+            <td class="ev"><%=bejegy._id.ev %></td>
+            <td class="napok"><%=bejegy.nap %></td>
+            <td class="hal"><%=bejegy.tbal %></td>
+            <td class="hal"><%=bejegy.tbod %></td>
+            <td class="hal"><%=bejegy.tcs %></td>
+            <td class="hal"><%=bejegy.tdom %></td>
+            <td class="hal"><%=bejegy.thar %></td>
+            <td class="hal"><%=bejegy.tsug %></td>
+            <td class="hal"><%=bejegy.tsul %></td>
+            <td class="hal"><%=bejegy.tth %></td>
+            <td class="hal"><%=bejegy.tvk %></td>
+        </tr>
+        <% }); %>
+        </tbody>
+    </table>
+</div>
+
+<% include ../_partials/footer %>

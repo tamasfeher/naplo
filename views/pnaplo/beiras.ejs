@@ -1,0 +1,92 @@
+<%- include("../_partials/header", {hatter: "hatter"})  %>
+<div class="form-container">
+    <div class="title">Bejegyzés</div>
+    <form action="/pergetonaplo" method="POST">
+        <div class="form-group">
+            <label for="pnBejegy[idopont]">Időpont:</label>
+            <input id="datepicker" class="form-control datepicker" type="text" name="pnBejegy[idopont]" required autocomplete="off">
+        </div>
+        <div class="form-group">
+            <label for="pnBejegy[hely]">Hely:</label>
+            <input class="form-control" type="text" name="pnBejegy[hely]" required>
+        </div>
+        <div class="halak-row ido">
+            <div class="form-group md">
+                <label for="pnBejegy[felhoKep]">Felhőkép:</label>
+                <input class="form-control" type="text" name="pnBejegy[felhoKep]" required>
+            </div>
+            <div class="form-group">
+                <label for="pnBejegy[atlCels]">Átl. h.:</label>
+                <input class="form-control sm" type="text" name="pnBejegy[atlCels]" required autocomplete="off"> °C
+            </div>
+        </div>
+        <div class="halak-row">
+            <div class="form-group md">
+                <label for="pnBejegy[start]">Kezdés:</label>
+                <input class="form-control" class="width50" type="time" name="pnBejegy[start]" required>
+            </div>
+            <div class="form-group md">
+                <label for="pnBejegy[vege]">Befejezés:</label>
+                <input class="form-control" class="width50" type="time" name="pnBejegy[vege]" required>
+            </div>
+        </div>
+        <div class="halak-row">
+            <div class="form-group">
+                <label for="pnBejegy[balin]">Balin:</label>
+                <input class="form-control sm" type="text" name="pnBejegy[balin] autocomplete="off"">
+            </div>
+
+            <div class="form-group">
+                <label for="pnBejegy[bodorka]">Bodorka:</label>
+                <input class="form-control sm" type="text" name="pnBejegy[bodorka]" autocomplete="off">
+            </div>
+        </div>
+
+        <div class="halak-row">
+            <div class="form-group">
+                <label for="pnBejegy[csuka]">Csuka:</label>
+                <input class="form-control sm" type="text" name="pnBejegy[csuka]" autocomplete="off">
+            </div>
+            <div class="form-group">
+                <label for="pnBejegy[domolyko]">Domolykó:</label>
+                <input class="form-control sm" type="text" name="pnBejegy[domolyko]" autocomplete="off">
+            </div>
+        </div>
+
+        <div class="halak-row">
+            <div class="form-group">
+                <label for="pnBejegy[harcsa]">Harcsa:</label>
+                <input class="form-control sm" type="text" name="pnBejegy[harcsa]" autocomplete="off">
+            </div>
+            <div class="form-group">
+                <label for="pnBejegy[suger]">Sügér:</label>
+                <input class="form-control sm" type="text" name="pnBejegy[suger]" autocomplete="off">
+            </div>
+        </div>
+
+        <div class="halak-row">
+            <div class="form-group">
+                <label for="pnBejegy[sullo]">Süllő:</label>
+                <input class="form-control sm" type="text" name="pnBejegy[sullo]" autocomplete="off">
+            </div>
+            <div class="form-group">
+                <label for="pnBejegy[torpeharcsa]">Törpeharcsa:</label>
+                <input class="form-control sm" type="text" name="pnBejegy[torpeharcsa]" autocomplete="off">
+            </div>
+        </div>
+
+        <div class="halak-row">
+            <div class="form-group">
+                <label for="pnBejegy[vorosszarnyu]">Vörösszárnyú:</label>
+                <input class="form-control sm" type="text" name="pnBejegy[vorosszarnyu]" autocomplete="off">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="pnBejegy[egyeb]">Egyéb:</label>
+            <input class="form-control" type="text" name="pnBejegy[egyeb]">
+        </div>
+        <input type="submit" value="Bejegyez">
+    </form>
+</div>
+
+<% include ../_partials/footer %>

@@ -1,0 +1,17 @@
+<%- include("./_partials/header", {hatter: "hatter"})  %>
+<div class="form-container">
+    <div class="title">Bejelentkezés</div>
+    <form action="/login" method="POST">
+        <div class="form-group">
+            <label class="log">Felhasználónév:</label>
+            <input class="form-control" type="text" name="username">
+        </div>
+        <div class="form-group">
+            <label class="log">Jelszó:</label>
+            <input class="form-control" type="password" name="password">
+        </div>
+        <input type="submit" value="Bejelentkezés">
+        <div><a href="/register">Ha még nincs fiókja, regisztráljon most!</a></div>
+    </form>
+</div>
+<% include ./_partials/footer %>

@@ -1,0 +1,11 @@
+//COLORS
+$green: green;
+$darkgreen: darkgreen;
+$yellow: yellow;
+$lightgreen: #4eb305;
+
+@mixin width1180() {
+  @media only screen and (max-width: 1180px) {
+    @content;
+  }
+}

@@ -1,0 +1,104 @@
+<footer>
+    <div class="container">Pergető horgásznapló 2019</div>
+</footer>
+
+<script
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+      <script
+        src="https://code.jquery.com/jquery-migrate-3.0.1.min.js"
+        integrity="sha256-F0O1TmEa4I8N24nY0bya59eP6svWcshqX1uzwaWC4F4="
+        crossorigin="anonymous"></script>
+      <script type="text/javascript" src="/js/slick.min.js"></script>
+        <script src="/node_modules/js-datepicker/src/datepicker.js"></script>
+<script>
+          function show(el) {
+            $('.mucsali-block').css("display", "none");
+            $('.'+el).css("display", "block");
+          }
+          $(document).ready(function(){
+            $('.kepek-slider').slick({
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                autoplay: true,
+                autoplaySpeed: 2000,
+            });
+
+            $('#idopont').on('click', function () {
+                $('.modal').toggleClass('opened');
+            });
+
+            $('.modal .close-btn').on('click', function () {
+                $('.modal').removeClass('opened');
+            });
+
+            $('.btn-modal').on('click', filterRows);
+          });
+
+          if($('.datepicker').length !== 0) {
+              function formatDate(date) {
+                  let d = new Date(date),
+                      month = '' + (d.getMonth() + 1),
+                      day = '' + d.getDate(),
+                      year = d.getFullYear();
+
+                  if (month.length < 2) month = '0' + month;
+                  if (day.length < 2) day = '0' + day;
+
+                  return [year, month, day].join('-');
+              }
+
+              $('.datepicker').each(function() {
+                  datepicker('#'+this.id, {
+                      customMonths: ['Január', 'Február', 'Március', 'Április', 'Május', 'Június',
+                          'Július', 'Augusztus', 'Szeptember', 'Október', 'November', 'December'],
+                      customDays: ['V', 'H', 'K', 'Sze', 'Cs', 'P', 'Szo'],
+                      startDay: 1,
+                      formatter: (input, date, instance) => {
+                          const value = formatDate(date)
+                          input.value = value // => '1/1/2099'
+                      },
+                      overlayPlaceholder: 'Adjon meg egy évszámot...',
+                      overlayButton: "Ugrás"
+                  });
+              });
+          }
+          function filterRows() {
+              var fromInput = $('#dateFilterFrom').val();
+              var toInput = $('#dateFilterTo').val();
+
+              if ((!fromInput && !toInput) || (toInput !== "" && fromInput > toInput)) {
+                  $('.pnaplo-table tr').each(function(i, tr) {
+                      $(tr).css('display', 'table-row');
+                  });
+                  console.log('emptyerror')
+                  return;
+              }
+
+              fromInput = fromInput || '1970-01-01'; // default from to a old date if it is not set
+              toInput = toInput || '2100-12-31';
+
+              var dateFrom = Date.parse(fromInput);
+              var dateTo = Date.parse(toInput);
+console.log('from: '+dateFrom)
+              $('.pnaplo-table tbody tr').each(function(i, tr) {
+                  var val = $(tr).find("td:nth-child(1)").text();
+                  var dateVal = Date.parse(val);
+                  console.log('val: '+dateVal)
+                  if(dateVal >= dateFrom){
+                      visible = "table-row";
+                      if(dateVal > dateTo){
+                          visible = "none"
+                      }
+                  }else{
+                      visible = "none";
+                  }
+                  $(tr).css('display', visible);
+              });
+              $('.modal').removeClass('opened');
+          }
+
+        </script>
+    </body>
+</html>
