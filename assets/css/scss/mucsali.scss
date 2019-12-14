@@ -14,38 +14,36 @@
 
 .mucsali-block{
   display: none;
-  width: 906px;
   margin: auto;
+  width: 906px;
+  display: grid;
+  grid-template-columns: auto auto auto;
 
-  .row{
-    display: flex;
+  .mucsali-item{
+    position: relative;
+    border: 1px solid #000;
+    padding: 0;
 
-    .mucsali-item{
-      position: relative;
-      border: 1px solid #000;
-      padding: 0;
+    .title{
+      background-color: #000;
+      color: yellow;
+      padding: 3px 5px;
+      font-weight: 600;
 
-      .title{
-        background-color: #000;
-        color: yellow;
-        padding: 3px 5px;
-        font-weight: 600;
-
-        a:hover{
-          color: #fff;
-        }
-      }
-      img {
-        width: 300px;
-        height: 180px;
-        display: block;
-      }
-      .halak {
-        position: absolute;
-        bottom: 0;
-        padding: 0 5px;
+      a:hover{
         color: #fff;
       }
+    }
+    img {
+      width: 300px;
+      height: 180px;
+      display: block;
+    }
+    .halak {
+      position: absolute;
+      bottom: 0;
+      padding: 0 5px;
+      color: #fff;
     }
   }
 }
@@ -55,6 +53,19 @@
     width: 100%;
     border-radius: 5px;
     margin: 20px 0;
+  }
+}
+
+@include tablet{
+  .mucsali-block {
+    width: 604px;
+    grid-template-columns: auto auto;
+  }
+}
+@include mobile{
+  .mucsali-block {
+    width: 302px;
+    grid-template-columns: auto;
   }
 }
 

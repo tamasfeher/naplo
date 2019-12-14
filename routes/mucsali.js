@@ -40,7 +40,7 @@ router.get("/", function(req, res){
                                     console.log(err);
                                     res.redirect("/");
                                 }else{
-                                    res.render("mucsali/index", {kfk: kfk, gumik: gumik, tmk: tmk, wbk: wbk});
+                                    res.render("mucsali/index", {mucsalik:{kfk: kfk, gumik: gumik, tmk: tmk, wbk: wbk}});
                                 }
                             });
                         }
