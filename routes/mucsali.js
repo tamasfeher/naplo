@@ -3,6 +3,7 @@ var router= express.Router(),
     passport= require("passport"),
     User = require("../models/user"),
     Mucsali = require("../models/mucsali"),
+    fs = require('fs'),
     multer  = require( 'multer' );
 var mw = require("../middleware/index");
 
@@ -20,22 +21,22 @@ var upload = multer( { storage: storage } );
 
 
 router.get("/", function(req, res){
-    Mucsali.find({"csoport": "Körforgó"} ,function (err, kfk) {
+    Mucsali.find({"csoport": "Körforgó"}).sort({sorszam: 1}).exec(function (err, kfk) {
         if(err){
             console.log(err);
             res.redirect("/");
         }else{
-            Mucsali.find({"csoport": "Gumi"} ,function (err, gumik){
+            Mucsali.find({"csoport": "Gumi"}).sort({sorszam: 1}).exec(function (err, gumik){
                 if(err){
                     console.log(err);
                     res.redirect("/");
                 }else{
-                    Mucsali.find({"csoport": "Támolygó"} ,function (err, tmk){
+                    Mucsali.find({"csoport": "Támolygó"}).sort({sorszam: 1}).exec(function (err, tmk){
                         if(err){
                             console.log(err);
                             res.redirect("/");
                         }else{
-                            Mucsali.find({"csoport": "Wobbler"} ,function (err, wbk){
+                            Mucsali.find({"csoport": "Wobbler"}).sort({sorszam: 1}).exec(function (err, wbk){
                                 if(err){
                                     console.log(err);
                                     res.redirect("/");
@@ -64,8 +65,10 @@ router.post("/", [mw.isLoggedIn, upload.single('photo')], function(req, res){
         mucsali.save();
         if(err){
             console.log(err);
+            req.flash("success","Hiba történt a műcsali létrehozása közben.");
             res.redirect("mucsali/uj");
         }else{
+            req.flash("success","Sikeresen létrehozta a következő műcsalit: "+mucsali.marka+" "+mucsali.tipus);
             res.redirect("mucsali");
         }
     });
@@ -77,16 +80,45 @@ router.get("/edit/:id", mw.isLoggedIn, function(req, res){
     })
 });
 
-router.post("/edit", mw.isLoggedIn, function(req, res){
+router.post("/edit", [mw.isLoggedIn, upload.single('photo')], function(req, res){
     Mucsali.findByIdAndUpdate(req.body.id, req.body.mucsali, function (err, mucsali) {
         if(err){
             console.log(err);
         }else{
+            if(typeof(req.file) !== 'undefined') {
+                fs.unlink(_rootPath+'/uploads/mucsalik/'+mucsali.kepUrl, function (err) {
+                    if(err){
+                        console.log(err);
+                    }
+                });
+                mucsali.kepUrl = req.file.filename;
+            }
             mucsali.halak = req.body.halak;
             mucsali.save();
+            req.flash("success","Sikeresen módosította a következő műcsalit: "+mucsali.marka+" "+mucsali.tipus);
+            res.redirect("/mucsali");
+        }
+    });
+});
+
+router.post("/delete", mw.isLoggedIn, function(req, res){
+    Mucsali.findByIdAndRemove(req.body.id, function (err, mucsali) {
+        if(err){
+            console.log(err);
+        }else{
+            fs.unlink(_rootPath+'/uploads/mucsalik/'+mucsali.kepUrl, function (err) {
+                if(err){
+                    console.log(err);
+                }
+            });
+            req.flash("success","Sikeresen törölte a következő műcsalit: "+mucsali.marka+" "+mucsali.tipus);
             res.redirect("/mucsali");
         }
     });
 });
 
 module.exports = router;
+
+function reorder(sorszam) {
+
+}

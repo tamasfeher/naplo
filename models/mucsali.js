@@ -17,6 +17,7 @@ var mucsaliSchema = mongoose.Schema({
         vor: Number,
         egyeb: String
     },
+    sorszam: Number,
     felh: {
         id: {
             type: mongoose.Schema.Types.ObjectId,

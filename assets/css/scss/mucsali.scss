@@ -4,7 +4,7 @@
   max-width: 490px;
   margin: 30px auto;
 
-  button{
+  div{
     background-color: green;
     color: yellow;
     padding: 10px 25px;
@@ -16,7 +16,6 @@
   display: none;
   margin: auto;
   width: 906px;
-  display: grid;
   grid-template-columns: auto auto auto;
 
   .mucsali-item{

@@ -6,14 +6,16 @@ var express     = require("express"),
     LocalStrategy = require("passport-local"),
     methodOverride = require("method-override"),
     User        = require("./models/user"),
-    flash       = require("connect-flash");
+    flash       = require("connect-flash"),
+    path        = require('path');
+global._rootPath = path.dirname(require.main.filename);
+
 var indexRoutes = require("./routes/index"),
     pNaploRoutes = require("./routes/pnaplo"),
     mucsaliRoutes = require("./routes/mucsali"),
     kepRoutes    = require("./routes/kep");
 var port = process.env.PORT || 3000;
-var Murl= process.env.DATABASEURL || "mongodb://localhost/naplo";
-//mongoose.connect("mongodb://localhost/yelp_camp_v6");
+var Murl = process.env.DATABASEURL || "mongodb://localhost/naplo";
 mongoose.connect(Murl);
 
 app.use(bodyParser.urlencoded({extended: true}));

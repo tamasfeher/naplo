@@ -8,15 +8,15 @@
     </div>
 
     <div class="mucsali-btns">
-        <button onclick="show('wobblerek')">Wobblerek</button>
-        <button onclick="show('korforgok')">Körforgók</button>
-        <button onclick="show('tamolygok')">Támolygók</button>
-        <button onclick="show('gumik')">Gumik</button>
+        <div id="wbk">Wobblerek</div>
+        <div id="kfk">Körforgók</div>
+        <div id="tmk">Támolygók</div>
+        <div id="gumik">Gumik</div>
     </div>
 
     <% let counter = 0;
     Object.keys(mucsalik).forEach(function(csoport){ %>
-    <div class="korforgok mucsali-block">
+    <div class="<%= csoport %> mucsali-block">
     <%
         mucsalik[csoport].forEach(function (mucsali) {
             let halak = mucsali.halak;
@@ -28,7 +28,7 @@
             }); %>
         <div class="mucsali-item col-12 col-md-4">
             <div class="title"><a href="mucsali/edit/<%= mucsali._id %>"><%= mucsali.marka+" "+mucsali.tipus %></a></div>
-            <div><img src="uploads/mucsalik/<%= mucsali.kepUrl %>" /></div>
+            <div><img src="/uploads/mucsalik/<%= mucsali.kepUrl %>" /></div>
             <div class="halak"><%= str.length > 0 ? str.substring(0, str.length - 2) : '' %></div>
         </div>
         <% counter++;

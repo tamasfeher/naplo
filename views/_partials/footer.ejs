@@ -13,10 +13,6 @@
       <script type="text/javascript" src="/js/slick.min.js"></script>
         <script src="/node_modules/js-datepicker/src/datepicker.js"></script>
 <script>
-          function show(el) {
-            $('.mucsali-block').css("display", "none");
-            $('.'+el).css("display", "block");
-          }
           $(document).ready(function(){
             $('.kepek-slider').slick({
                 slidesToShow: 3,
@@ -33,7 +29,26 @@
                 $('.modal').removeClass('opened');
             });
 
+              $('.mucsali-btns > div').on('click', function () {
+                  show(this.id);
+              });
+
             $('.btn-modal').on('click', filterRows);
+
+            $('.attach-icon').on('click', function () {
+                $('#fileInput').trigger('click');
+            });
+              $('#fileInput').on('change', function () {
+                  if(this.files.length > 0) {
+                      $('#fileName').text(this.files[0].name);
+                  }else{
+                      $('#fileName').text('');
+                  }
+              });
+          });
+
+          $('.delete-btn').on('click', function () {
+             $('#delete').trigger('click');
           });
 
           if($('.datepicker').length !== 0) {
@@ -99,6 +114,10 @@ console.log('from: '+dateFrom)
               $('.modal').removeClass('opened');
           }
 
+          function show(el) {
+              $('.mucsali-block').css("display", "none");
+              $('.'+el).css("display", "grid");
+          }
         </script>
     </body>
 </html>

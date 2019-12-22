@@ -1,11 +1,31 @@
 <%- include("../_partials/header", {hatter: "hatter"})  %>
 <div class="form-container">
     <div class="title">Módosítás</div>
-    <form action="/mucsali/edit" method="POST">
+    <form class="hidden" action="/mucsali/delete" method="POST">
+        <input type="hidden" name="id" value="<%= mucsali._id %>" />
+        <input type="submit" id="delete"/>
+    </form>
+    <form action="/mucsali/edit" method="POST" enctype="multipart/form-data">
+        <img src="/assets/images/trash.png" class="delete-btn" />
         <input type="hidden" name="id" value="<%= mucsali._id %>" />
         <div class="name"><%= mucsali.marka+" "+mucsali.tipus %></div>
         <div class="edit-image">
             <img src="/uploads/mucsalik/<%= mucsali.kepUrl %>" />
+        </div>
+
+        <div class="flex-group kep">
+            <div class="form-group">
+                <label for="photo">Kép:</label>
+                <div class="form-control fake-input">
+                    <div id="fileName"><%= mucsali.kepUrl %></div>
+                    <img src="/assets/images/attach.png" class="attach-icon"/>
+                </div>
+                <input id="fileInput" class="form-control file" type="file" accept="image/jpg" name="photo">
+            </div>
+            <div class="form-group">
+                <label for="sorszam">Sorszám:</label>
+                <input class="form-control sm" type="text" name="mucsali[sorszam]" value="<%= mucsali.sorszam %>">
+            </div>
         </div>
 
         <div class="form-group">
@@ -18,7 +38,7 @@
             <input class="form-control" type="text" name="mucsali[tipus]" value="<%= mucsali.tipus %>">
         </div>
 
-        <div class="halak-row">
+        <div class="flex-group">
             <div class="form-group">
                 <label for="halak[bal]">Balin:</label>
                 <input class="form-control sm" type="text" name="halak[bal]" value="<%= mucsali.halak.bal %>">
@@ -30,7 +50,7 @@
             </div>
         </div>
 
-        <div class="halak-row">
+        <div class="flex-group">
             <div class="form-group">
                 <label for="halak[cs]">Csuka:</label>
                 <input class="form-control sm" type="text" name="halak[cs]" value="<%= mucsali.halak.cs %>">
@@ -41,7 +61,7 @@
                 <input class="form-control sm" type="text" name="halak[dom]" value="<%= mucsali.halak.dom %>">
             </div>
         </div>
-        <div class="halak-row">
+        <div class="flex-group">
             <div class="form-group">
                 <label for="halak[har]">Harcsa:</label>
                 <input class="form-control sm" type="text" name="halak[har]" value="<%= mucsali.halak.har %>">
@@ -53,7 +73,7 @@
             </div>
         </div>
 
-        <div class="halak-row">
+        <div class="flex-group">
             <div class="form-group">
                 <label for="halak[sul]">Süllő:</label>
                 <input class="form-control sm" type="text" name="halak[sul]" value="<%= mucsali.halak.sul %>">
@@ -64,7 +84,7 @@
                 <input class="form-control sm" type="text" name="halak[th]" value="<%= mucsali.halak.th %>">
             </div>
         </div>
-        <div class="halak-row">
+        <div class="flex-group">
             <div class="form-group">
                 <label for="halak[vor]">Vörösszarnyú:</label>
                 <input class="form-control sm" type="text" name="halak[vor]" value="<%= mucsali.halak.vor %>">
@@ -75,7 +95,7 @@
             <input class="form-control" type="text" name="halak[egyeb]" value="<%= mucsali.halak.egyeb %>">
         </div>
 
-        <input type="submit" value="Módosítás">
+        <input class="press-enter" type="submit" value="Módosítás">
     </form>
 </div>
 <% include ../_partials/footer %>
