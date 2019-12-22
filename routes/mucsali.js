@@ -6,6 +6,7 @@ var router= express.Router(),
     fs = require('fs'),
     multer  = require( 'multer' );
 var mw = require("../middleware/index");
+var routerObj = {jsFile: 'mucsali.js'};
 
 var storage = multer.diskStorage(
     {
@@ -41,7 +42,7 @@ router.get("/", function(req, res){
                                     console.log(err);
                                     res.redirect("/");
                                 }else{
-                                    res.render("mucsali/index", {mucsalik:{kfk: kfk, gumik: gumik, tmk: tmk, wbk: wbk}});
+                                    res.render("mucsali/index", {mucsalik:{kfk: kfk, gumik: gumik, tmk: tmk, wbk: wbk}, vars: routerObj});
                                 }
                             });
                         }
@@ -53,7 +54,7 @@ router.get("/", function(req, res){
 });
 
 router.get("/uj", mw.isLoggedIn, function(req, res){
-    res.render("mucsali/uj");
+    res.render("mucsali/uj", {vars: routerObj});
 });
 
 router.post("/", [mw.isLoggedIn, upload.single('photo')], function(req, res){
@@ -76,7 +77,7 @@ router.post("/", [mw.isLoggedIn, upload.single('photo')], function(req, res){
 
 router.get("/edit/:id", mw.isLoggedIn, function(req, res){
     Mucsali.findById(req.params.id ,function (err, mucsali) {
-        res.render("mucsali/edit", {mucsali: mucsali});
+        res.render("mucsali/edit", {mucsali: mucsali, vars: routerObj});
     })
 });
 

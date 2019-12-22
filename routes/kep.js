@@ -3,8 +3,9 @@ var router= express.Router(),
     passport= require("passport"),
     User = require("../models/user"),
     Kep = require("../models/kep"),
-    multer  = require( 'multer' );;
+    multer  = require( 'multer' );
 var mw = require("../middleware/index");
+var routerObj = {jsFile: 'kep.js'};
 
 var storage = multer.diskStorage(
     {
@@ -24,12 +25,12 @@ router.get("/", function(req, res){
             console.log(err);
             res.redirect("/");
         }else{
-            res.render("kep/index", {kepek: kep});
+            res.render("kep/index", {kepek: kep, slickOn: true, vars: routerObj});
         }
     });
 });
 router.get("/uj", mw.isLoggedIn, function(req, res){
-    res.render("kep/uj");
+    res.render("kep/uj", {vars: routerObj});
 });
 router.post("/", [mw.isLoggedIn, upload.single('photo')], function(req, res){
 

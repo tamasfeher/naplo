@@ -5,7 +5,7 @@
   position: fixed;
   width: 100%;
   top: 0;
-  background-color: rgba(0,0,0,0.6);
+  background-color: rgba(0,0,0,0.9);
 
   ul{
     margin: 0;
@@ -85,19 +85,38 @@
 @media (max-width: 991px){
   .navbar{
 
+    .btn{
+      padding: 8px 16px;
+      background-color: transparent;
+      &.menu:hover{
+        padding: 8px 16px;
+      }
+    }
     .navbar-collapse {
-      display: none;
-      flex-direction: column;
+      //display: none;
+      flex-direction: column-reverse;
       position: absolute;
       top: 62px;
-      background-color: rgba(0,128,0,0.7);
 
       ul{
-        .main-menu{
+        &.main-menu{
           margin-top: 0;
+          padding: 0;
+          background-color: rgba(0,128,0,0.9);
+          li {
+            display: block;
+            padding: 8px;
+            border-top: 1px solid $yellow;
+          }
         }
-        li {
-          display: block;
+        &.navbar-right{
+          padding: 20px;
+          margin: 0;
+          background-color: rgba(0,0,0,0.9);
+          ul li{
+            display: inline-flex;
+            margin-bottom: 5px;
+          }
         }
       }
     }

@@ -39,7 +39,7 @@ router.post("/login", passport.authenticate("local",
     {
         failureRedirect: "/login"
     }), function(req, res){
-        res.redirect(req.session.redirectTo);
+        res.redirect(typeof req.session.redirectTo === 'undefined' ? '/' : req.session.redirectTo);
 });
 
 // logic route

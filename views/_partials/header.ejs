@@ -5,8 +5,31 @@
         <title>Napló</title>
         <link rel="stylesheet" href="/node_modules/js-datepicker/dist/datepicker.min.css">
         <link rel="stylesheet" type="text/css" href="/css/main.css">
-        <link rel="stylesheet" type="text/css" href="/css/slick.css"/>
-        <link rel="stylesheet" type="text/css" href="/css/slick-theme.css"/>
+
+        <script
+                src="https://code.jquery.com/jquery-3.3.1.min.js"
+                integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+                crossorigin="anonymous"></script>
+        <script
+                src="https://code.jquery.com/jquery-migrate-3.0.1.min.js"
+                integrity="sha256-F0O1TmEa4I8N24nY0bya59eP6svWcshqX1uzwaWC4F4="
+                crossorigin="anonymous"></script>
+
+        <% if(typeof slickOn !== "undefined"){ %>
+            <link rel="stylesheet" type="text/css" href="/css/slick.css"/>
+            <link rel="stylesheet" type="text/css" href="/css/slick-theme.css"/>
+            <script type="text/javascript" src="/js/slick.min.js"></script>
+        <% } %>
+
+        <script type="text/javascript" src="/js/general.js"></script>
+        <% if(typeof vars !== "undefined"){ %>
+            <% if(typeof vars.datepOn !== "undefined"){ %>
+                <script src="/node_modules/js-datepicker/src/datepicker.js"></script>
+            <% } %>
+            <% if(typeof vars.jsFile !== "undefined"){ %>
+                <script type="text/javascript" src="/js/<%= vars.jsFile %>"></script>
+            <% } %>
+        <% } %>
 
     </head>
     <body <%= typeof hatter !== 'undefined' ? 'class='+hatter : "" %>>

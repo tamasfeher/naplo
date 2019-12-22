@@ -12,8 +12,8 @@
         <table class="pnaplo-table">
             <thead class="thead-dark">
                 <tr>
-                    <th id="idopont">Időpont</th>
-                    <th>Hely</th>
+                    <th class="szuroModal" id="idopont">Időpont</th>
+                    <th class="szuroModal" id="hely">Hely</th>
                     <th>Időjárás</th>
                     <th>Óra</th>
                     <th>Ba</th>
@@ -31,7 +31,7 @@
             <tbody>
             <% bejegys.forEach(function(bejegy){ %>
                 <tr>
-                    <td><%=getDateFormat(bejegy.idopont) %></td>
+                    <td data-time="<%=bejegy.idopont %>>"><%=getDateFormat(bejegy.idopont) %></td>
                     <td><%=bejegy.hely %></td>
                     <td><%=bejegy.atlCels %> °C, <%=bejegy.felhoKep %></td>
                     <td><%=bejegy.start %>-<%=bejegy.vege %></td>
@@ -62,13 +62,8 @@
                 <div class="stick stick-right"></div>
             </div>
         </div>
-        <div>
-            <label for="dateFilterFrom">Kezdő nap:</label>
-            <input type="text" class="datepicker" id="dateFilterFrom">
-        </div>
-        <div>
-            <label for="dateFilterTo">Záró nap:</label>
-            <input type="text" class="datepicker" id="dateFilterTo">
+        <div class="modal-form">
+
         </div>
         <div class="btn-modal">Szűrés</div>
     </div>

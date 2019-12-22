@@ -4,20 +4,22 @@ var router= express.Router(),
     User = require("../models/user"),
     Bejegy = require("../models/pnaplo");
 var mw = require("../middleware/index");
+var request = require('ajax-request');
+var routerObj = {jsFile: 'pnaplo.js', datepOn: true};
 
 router.get("/", mw.isLoggedIn, function(req, res){
     Bejegy.find({'felh.id': req.user._id } ,function (err, bej) {
         if(err){
             console.log(err);
         }else{
-            res.render("pnaplo/index", {bejegys: bej});
+            res.render("pnaplo/index", {bejegys: bej, vars: routerObj});
         }
     });
 
 });
 
 router.get("/beiras", mw.isLoggedIn, function(req, res){
-    res.render("pnaplo/beiras");
+    res.render("pnaplo/beiras", {vars: routerObj});
 });
 router.post("/", mw.isLoggedIn, function(req, res){
     Bejegy.create(req.body.pnBejegy, function (err, bej) {
@@ -69,8 +71,37 @@ router.get("/osszesito", mw.isLoggedIn, function(req, res){
         if(err){
             console.log(err)
         }else{
-            res.render("pnaplo/osszesito", {osszesitett: ossz});
+            res.render("pnaplo/osszesito", {osszesitett: ossz, vars: routerObj});
         }
     });
 });
+
+router.post('/szuro', function (req, res) {
+    let form = '';
+    switch(req.body.id){
+        case 'idopont':
+            form = '<div><label for="dateFilterFrom">Kezdő nap:</label>' +
+                '<input type="text" class="datepicker" id="dateFilterFrom"></div>' +
+                '<div><label for="dateFilterTo">Záró nap:</label>' +
+                '<input type="text" class="datepicker" id="dateFilterTo"></div>';
+            break;
+        case 'hely':
+            form ='<select>' +
+                '<option value="Balaton">Balaton</option>' +
+                '<option value="Bükkösdi-víz">Bükkösdi-víz</option>' +
+                '<option value="Fekete-víz">Fekete-víz</option>' +
+                '<option value="Gaja-patak">Gaja-patak</option>' +
+                '<option value="Hótedra-tó">Hótedra-tó</option>' +
+                '<option value="Karasica">Karasica</option>' +
+                '<option value="Kökényi-tó">Kökényi-tó</option>' +
+                '<option value="Malomvölgyi-tó">Malomvölgyi-tó</option>' +
+                '<option value="Mattyi-tó">Mattyi-tó</option>' +
+                '<option value="Pécsi-víz">Pécsi-víz</option>' +
+                '<option value="Rinya-patak">Rnya-patak</option>' +
+                '</select>';
+            break;
+    }
+    res.send(form);
+});
+
 module.exports = router;
