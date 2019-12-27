@@ -64,14 +64,44 @@ router.get("/osszesito", mw.isLoggedIn, function(req, res){
             tsug: {$sum: "$suger"},
             tsul: {$sum: "$sullo"},
             tth: {$sum: "$torpeharcsa"},
-            tvk: {$sum: "$vorosszarnyu"}
+            tvk: {$sum: "$vorosszarnyu"},
+            egyeb: {$push: "$egyeb"}
         }
         },
         {$sort: {_id: -1}}], function (err, ossz) {
         if(err){
             console.log(err)
         }else{
+            ossz = egyebForOsszesites(ossz)
             res.render("pnaplo/osszesito", {osszesitett: ossz, vars: routerObj});
+        }
+    });
+});
+
+router.get("/osszesito/hely", mw.isLoggedIn, function(req, res){
+    Bejegy.aggregate([
+        {$match: {"felh.username": req.user.username}},
+        {$group: {
+                _id:  {hely: "$hely" },
+                nap: {$sum: 1},
+                tbal: {$sum: "$balin"},
+                tbod: {$sum: "$bodorka"},
+                tcs: {$sum: "$csuka"},
+                tdom: {$sum: "$domolyko"},
+                thar: {$sum: "$harcsa"},
+                tsug: {$sum: "$suger"},
+                tsul: {$sum: "$sullo"},
+                tth: {$sum: "$torpeharcsa"},
+                tvk: {$sum: "$vorosszarnyu"},
+                egyeb: {$push: "$egyeb"}
+            }
+        },
+        {$sort: {_id: -1}}], function (err, ossz) {
+        if(err){
+            console.log(err)
+        }else{
+            ossz = egyebForOsszesites(ossz);
+            res.render("pnaplo/hely", {osszesitett: ossz, vars: routerObj});
         }
     });
 });
@@ -80,13 +110,14 @@ router.post('/szuro', function (req, res) {
     let form = '';
     switch(req.body.id){
         case 'idopont':
-            form = '<div><label for="dateFilterFrom">Kezdő nap:</label>' +
+            form = '<div id="filterBy" class="hidden">idopont</div><div><label for="dateFilterFrom">Kezdő nap:</label>' +
                 '<input type="text" class="datepicker" id="dateFilterFrom"></div>' +
                 '<div><label for="dateFilterTo">Záró nap:</label>' +
                 '<input type="text" class="datepicker" id="dateFilterTo"></div>';
             break;
         case 'hely':
-            form ='<select>' +
+            form ='<div id="filterBy" class="hidden">hely</div><select id="filterPlace">' +
+                '<option value="">Válassz helyet...</option>' +
                 '<option value="Balaton">Balaton</option>' +
                 '<option value="Bükkösdi-víz">Bükkösdi-víz</option>' +
                 '<option value="Fekete-víz">Fekete-víz</option>' +
@@ -97,11 +128,42 @@ router.post('/szuro', function (req, res) {
                 '<option value="Malomvölgyi-tó">Malomvölgyi-tó</option>' +
                 '<option value="Mattyi-tó">Mattyi-tó</option>' +
                 '<option value="Pécsi-víz">Pécsi-víz</option>' +
-                '<option value="Rinya-patak">Rnya-patak</option>' +
+                '<option value="Rinya-patak">Rinya-patak</option>' +
                 '</select>';
             break;
     }
     res.send(form);
 });
+
+function egyebForOsszesites(ossz){
+    let egyebHalak = ['Jászkeszeg','Kárász','Nyúldomolykó','Paduc','Naphal','Küsz'];
+    ossz.forEach(function (bejegy) {
+        var ujEgyeb = [];
+        var ujEgyebTomb = [];
+        var egyeb = bejegy.egyeb.filter(function (el) {
+            return el !== '';
+        });
+        egyeb.forEach(function (egy) {
+            let egyebek = egy.split(', ');
+            egyebek.forEach(function (egyb) {
+                let egyTomb = egyb.split(' db ');
+                egyebHalak.forEach(function (egyebHal) {
+                    if(egyTomb[1] === egyebHal) {
+                        if (typeof ujEgyeb[egyebHal] === 'undefined') ujEgyeb[egyebHal] = 0;
+                        ujEgyeb[egyebHal] += parseInt(egyTomb[0]);
+                    }
+                });
+            });
+        });
+
+        var i = 0;
+        for (var key in ujEgyeb) {
+            ujEgyebTomb[i] = ujEgyeb[key]+' db '+key;
+            i++;
+        }
+        bejegy.egyeb = ujEgyebTomb.join(', ');
+    });
+    return ossz;
+}
 
 module.exports = router;

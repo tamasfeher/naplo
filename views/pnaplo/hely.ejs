@@ -10,7 +10,7 @@
     <table class="pnaplo-table osszesito">
         <thead class="thead-dark">
         <tr>
-            <th>Év</th>
+            <th>Hely</th>
             <th>Napok</th>
             <th>Ba</th>
             <th>Bo</th>
@@ -27,7 +27,7 @@
         <tbody>
         <% osszesitett.forEach(function(bejegy){ %>
         <tr>
-            <td class="ev"><%=bejegy._id.ev %></td>
+            <td class="ev"><%=bejegy._id.hely %></td>
             <td class="napok"><%=bejegy.nap %></td>
             <td class="hal"><%=bejegy.tbal %></td>
             <td class="hal"><%=bejegy.tbod %></td>
@@ -38,7 +38,7 @@
             <td class="hal"><%=bejegy.tsul %></td>
             <td class="hal"><%=bejegy.tth %></td>
             <td class="hal"><%=bejegy.tvk %></td>
-            <td class="hal"><%=bejegy.egyeb %></td>
+            <td class="egyeb"><%=bejegy.egyeb %></td>
         </tr>
         <% }); %>
         </tbody>

@@ -1,7 +1,4 @@
 $(document).ready(function () {
-    $('#idopont').on('click', function () {
-        $('.modal').toggleClass('opened');
-    });
     $('.modal .close-btn').on('click', function () {
         $('.modal').removeClass('opened');
     });
@@ -18,6 +15,7 @@ $(document).ready(function () {
             success: function (res) {
                 $('.modal-form').html(res);
                 if($('.datepicker').length !== 0) datepickerInit();
+                $('.modal').toggleClass('opened');
             }
         });
     });
@@ -25,7 +23,19 @@ $(document).ready(function () {
 
 //---- FUNCTIONS ----//
 
-function filterRows() {
+function filterRows () {
+    switch ($('#filterBy').text()) {
+        case 'idopont':
+            filterByDate();
+            break;
+        case 'hely':
+            filterByPlace();
+            break;
+    }
+    $('.modal').removeClass('opened');
+}
+
+function filterByDate() {
     var fromInput = $('#dateFilterFrom').val();
     var toInput = $('#dateFilterTo').val();
 
@@ -42,18 +52,33 @@ function filterRows() {
 
     var dateFrom = Date.parse(fromInput);
     var dateTo = Date.parse(toInput);
+
     $('.pnaplo-table tbody tr').each(function(i, tr) {
+        let display = 'none';
         var val = $(tr).find("td[data-time]").attr('data-time');
         var dateVal = Date.parse(val);
         if(dateVal >= dateFrom){
-            visible = "table-row";
+            display = "table-row";
             if(dateVal > dateTo){
-                visible = "none"
+                display = "none"
             }
-        }else{
-            visible = "none";
         }
-        $(tr).css('display', visible);
+        $(tr).css('display', display);
     });
-    $('.modal').removeClass('opened');
+}
+
+function filterByPlace() {
+    let hely = $('#filterPlace').val();
+    if(hely === ''){
+        $('.pnaplo-table tbody tr').css('display', 'table-row');
+    }else {
+        $('.pnaplo-table tbody tr').each(function (i, tr) {
+            var val = $(tr).find("td:nth-child(2)").text();
+            let display = 'none';
+            if (val.includes(hely)) {
+                display = "table-row";
+            }
+            $(tr).css('display', display);
+        });
+    }
 }
