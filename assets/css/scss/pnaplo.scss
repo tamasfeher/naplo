@@ -44,6 +44,15 @@
     }
   }
 }
+
+.szuroModal {
+  cursor: pointer;
+  text-decoration: underline;
+  &:hover{
+    text-decoration: none;
+  }
+}
+
 .modal {
   &.opened{
     #dateModal, .modal-filter{

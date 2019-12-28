@@ -4,7 +4,11 @@
     <form action="/kep" method="POST" enctype="multipart/form-data">
         <div class="form-group">
             <label for="photo">Kép:</label>
-            <input class="form-control file" type="file" accept="image/jpg" name="photo" required>
+            <div class="form-control fake-input">
+                <div id="fileName"></div>
+                <img src="/assets/images/attach.png" class="attach-icon"/>
+            </div>
+            <input id="fileInput" class="form-control file" type="file" accept="image/jpg" name="photo" required>
         </div>
         <div class="form-group">
             <label for="kep[hely]">Hely:</label>

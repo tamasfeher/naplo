@@ -61,6 +61,10 @@ a{
   width: 50px;
 }
 
+.slide-item{
+  outline: none;
+}
+
 .form-container{
   padding: 0 40px;
 
@@ -120,7 +124,6 @@ a{
               max-width: unset;
               text-align: left;
               line-height: 20px;
-              position: relative;
 
               #fileName{
                 white-space: nowrap;
@@ -192,6 +195,9 @@ a{
           padding: 4px;
           text-align: center;
           display: inline-block;
+        }
+        &.fake-input{
+          position: relative;
         }
 
       }

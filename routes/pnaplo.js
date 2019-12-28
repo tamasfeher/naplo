@@ -128,8 +128,9 @@ router.post('/szuro', function (req, res) {
                 '<option value="Malomvölgyi-tó">Malomvölgyi-tó</option>' +
                 '<option value="Mattyi-tó">Mattyi-tó</option>' +
                 '<option value="Pécsi-víz">Pécsi-víz</option>' +
+                '<option value="Pécsi-víz">Pécsi-tó</option>' +
                 '<option value="Rinya-patak">Rinya-patak</option>' +
-                '</select>';
+                '</select><a class="btn btn-yellow btn-float-modal" href="/pergetonaplo/osszesito/hely">Összesítő</a>';
             break;
     }
     res.send(form);
