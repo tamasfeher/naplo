@@ -1,10 +1,20 @@
 $(document).ready(function () {
     if($('.kepek-slider').length > 0){
         $('.kepek-slider').slick({
-            slidesToShow: 3,
+            slidesToShow: 2,
             slidesToScroll: 1,
             autoplay: true,
-            autoplaySpeed: 2000,
+            autoplaySpeed: 6000,
+            infinite: false,
+            arrows: false,
+            responsive: [
+                {
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 1
+                    }
+                }
+            ]
         });
     }
 

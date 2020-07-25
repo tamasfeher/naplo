@@ -8,13 +8,26 @@ var request = require('ajax-request');
 var routerObj = {jsFile: 'pnaplo.js', datepOn: true};
 
 router.get("/", mw.isLoggedIn, function(req, res){
+    routerObj.osszes = false;
     Bejegy.find({'felh.id': req.user._id } ,function (err, bej) {
         if(err){
             console.log(err);
         }else{
             res.render("pnaplo/index", {bejegys: bej, vars: routerObj});
         }
-    });
+    }).sort({'idopont': -1}).limit(10);
+
+});
+
+router.get("/osszes", mw.isLoggedIn, function(req, res){
+    routerObj.osszes = true;
+    Bejegy.find({'felh.id': req.user._id } ,function (err, bej) {
+        if(err){
+            console.log(err);
+        }else{
+            res.render("pnaplo/index", {bejegys: bej, vars: routerObj});
+        }
+    }).sort({'idopont': -1});
 
 });
 
@@ -106,6 +119,38 @@ router.get("/osszesito/hely", mw.isLoggedIn, function(req, res){
     });
 });
 
+router.get("/osszesito/viz", mw.isLoggedIn, function(req, res){
+    Bejegy.aggregate([
+        {$match: {"hely":  { "$regex": "csi", "$options": "i" }}},
+        {$group: {
+                // _id:  { $regexFindAll: { input: "$hely", regex: /Pécsi-víz/i } },
+                _id: null,
+                nap: {$sum: 1},
+                tbal: {$sum: "$balin"},
+                tbod: {$sum: "$bodorka"},
+                tcs: {$sum: "$csuka"},
+                tdom: {$sum: "$domolyko"},
+                thar: {$sum: "$harcsa"},
+                tsug: {$sum: "$suger"},
+                tsul: {$sum: "$sullo"},
+                tth: {$sum: "$torpeharcsa"},
+                tvk: {$sum: "$vorosszarnyu"},
+                egyeb: {$push: "$egyeb"}
+            }
+        }
+        ], function (err, ossz) {
+        if(err){
+            console.log(err)
+        }else{
+            // ossz = clearOsszForViz(ossz);
+            console.log(ossz[0]._id)
+            ossz = egyebForOsszesites(ossz);
+            res.render("pnaplo/hely", {osszesitett: ossz, vars: routerObj});
+        }
+    });
+
+});
+
 router.post('/szuro', function (req, res) {
     let form = '';
     switch(req.body.id){
@@ -135,6 +180,12 @@ router.post('/szuro', function (req, res) {
     }
     res.send(form);
 });
+
+function clearOsszForViz(ossz) {
+    ossz.pop();
+    console.log(ossz)
+    return ossz;
+}
 
 function egyebForOsszesites(ossz){
     let egyebHalak = ['Jászkeszeg','Kárász','Nyúldomolykó','Paduc','Naphal','Küsz'];

@@ -100,11 +100,12 @@
 }
 .slick-initialized .slick-slide
 {
-    border: 1px solid #ccc;
+    border: 1px solid #5555;
     border-radius: 10px;
     overflow: hidden;
     margin: 0 10px;
     display: flex;
+    flex-direction: column;
 }
 .slick-loading .slick-slide
 {

@@ -6,6 +6,11 @@
         <div class="buttons">
             <a class="btn btn-yellow" href="/pergetonaplo/beiras">Beírás</a>
             <a class="btn btn-yellow" href="/pergetonaplo/osszesito">Összesítés</a>
+            <% if(vars.osszes){ %>
+                <a class="btn btn-yellow" href="/pergetonaplo">Legutóbbi bejegyzések</a>
+            <% }else{ %>
+                <a class="btn btn-yellow" href="/pergetonaplo/osszes">Összes bejegyzés</a>
+            <% } %>
         </div>
     </div>
     <div class="table-container">

@@ -94,7 +94,16 @@ router.post("/edit", [mw.isLoggedIn, upload.single('photo')], function(req, res)
                 });
                 mucsali.kepUrl = req.file.filename;
             }
-            mucsali.halak = req.body.halak;
+
+            var index = 0
+            Object.values(req.body.halak).forEach(function (hal) {
+                if(Object.keys(req.body.halak)[index] !== 'egyeb' && hal !== '') {
+                    mucsali.halak[Object.keys(req.body.halak)[index]] += Number(hal)
+                }
+                index++
+            })
+            mucsali.halak.egyeb = req.body.halak.egyeb
+
             mucsali.save();
             req.flash("success","Sikeresen módosította a következő műcsalit: "+mucsali.marka+" "+mucsali.tipus);
             res.redirect("/mucsali");
