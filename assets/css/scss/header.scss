@@ -6,10 +6,10 @@
   width: 100%;
   top: 0;
   background-color: rgba(0,0,0,0.9);
+  z-index: 20;
 
   ul{
     margin: 0;
-
     &.main-menu{
       margin-top: -6px;
     }
